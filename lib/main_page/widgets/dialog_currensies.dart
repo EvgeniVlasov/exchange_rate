@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DialogCurrencies extends GetView<MainController> {
-  final List<String> currencies;
   final bool isUserField;
 
   const DialogCurrencies({
     super.key,
-    required this.currencies,
     required this.isUserField,
   });
 
@@ -20,7 +18,7 @@ class DialogCurrencies extends GetView<MainController> {
         height: 400,
         child: SingleChildScrollView(
           child: Column(
-            children: currencies
+            children: controller.currencies!
                 .map((e) => Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

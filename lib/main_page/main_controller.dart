@@ -14,7 +14,7 @@ final class MainController extends GetxController {
   final RxString userCurrency = ''.obs;
   final RxString convectorCurrency = ''.obs;
   final RxString bufferCurrency = ''.obs;
-  List<String>? _currencies;
+  List<String>? currencies;
 
   MainController({required MainService mainService})
       : _mainService = mainService;
@@ -27,7 +27,7 @@ final class MainController extends GetxController {
 
   Future _getExchangesRates() async {
     isLoadingPage.value = true;
-    _currencies = await _mainService.getExchangeRates();
+    currencies = await _mainService.getExchangeRates();
     isLoadingPage.value = false;
   }
 
@@ -56,9 +56,8 @@ final class MainController extends GetxController {
   void showCurrenciesList(bool isUserField) {
     bufferCurrency.value =
         isUserField ? userCurrency.value : convectorCurrency.value;
-    if (_currencies != null) {
+    if (currencies != null) {
       Get.dialog(DialogCurrencies(
-        currencies: _currencies!,
         isUserField: isUserField,
       ));
     }
