@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LocalStorageProvider {
+final class LocalStorageProvider {
   final SharedPreferences _prefs;
 
   LocalStorageProvider(this._prefs);

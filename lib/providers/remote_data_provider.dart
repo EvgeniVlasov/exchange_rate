@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:exchange_rates/models/rates_response.dart';
 
-class RemoteDataProvider {
+final class RemoteDataProvider {
   final Dio _client;
   static final BaseOptions _clientOptions = BaseOptions(
     baseUrl: 'http://api.exchangeratesapi.io',

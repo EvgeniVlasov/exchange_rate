@@ -34,9 +34,16 @@ final class MainService extends GetxService {
       {required String input,
       required String dividendKey,
       required String divisorKey}) {
-    final value = double.parse(input);
-    final coefficient = rates?[dividendKey] / rates?[divisorKey];
-    final valueConvector = value * coefficient;
-    return valueConvector.toString();
+    try {
+      if (input.contains(',')) {
+        input = input.replaceAll(',', '.');
+      }
+      final value = double.parse(input);
+      final coefficient = rates?[dividendKey] / rates?[divisorKey];
+      final valueConvector = value * coefficient;
+      return valueConvector.toString();
+    } catch (_) {
+      return '';
+    }
   }
 }

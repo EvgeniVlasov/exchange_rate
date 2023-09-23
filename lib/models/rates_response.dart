@@ -1,4 +1,4 @@
-class RatesResponse {
+final class RatesResponse {
   final bool? isSuccess;
   final int? timestamp;
   final String? base;

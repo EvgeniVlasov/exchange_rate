@@ -1,6 +1,7 @@
 import 'package:exchange_rates/main_page/widgets/dialog_currensies.dart';
 import 'package:exchange_rates/servises/main_service.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 final class MainController extends GetxController {
@@ -13,7 +14,7 @@ final class MainController extends GetxController {
   final RxString userCurrency = ''.obs;
   final RxString convectorCurrency = ''.obs;
   final RxString bufferCurrency = ''.obs;
-  List<String>? currencies;
+  List<String>? _currencies;
 
   MainController({required MainService mainService})
       : _mainService = mainService;
@@ -26,7 +27,7 @@ final class MainController extends GetxController {
 
   Future _getExchangesRates() async {
     isLoadingPage.value = true;
-    currencies = await _mainService.getExchangeRates();
+    _currencies = await _mainService.getExchangeRates();
     isLoadingPage.value = false;
   }
 
@@ -52,20 +53,23 @@ final class MainController extends GetxController {
     }
   }
 
-  showCurrenciesList(bool isUserField) {
+  void showCurrenciesList(bool isUserField) {
     bufferCurrency.value =
         isUserField ? userCurrency.value : convectorCurrency.value;
-    if (currencies != null) {
+    if (_currencies != null) {
       Get.dialog(DialogCurrencies(
-        currencies: currencies!,
+        currencies: _currencies!,
         isUserField: isUserField,
       ));
     }
   }
 
-  onPressCancelDialog(bool isUserField) => Get.back();
+  void onPressCancelDialog(bool isUserField) {
+    bufferCurrency.value = '';
+    Get.back();
+  }
 
-  onPressOKDialog(bool isUserField) {
+  void onPressOKDialog(bool isUserField) {
     if (isUserField) {
       userCurrency.value = bufferCurrency.value;
       if (convectorCurrency.isNotEmpty) {

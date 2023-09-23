@@ -33,9 +33,10 @@ class InputFieldCurrency extends StatelessWidget {
               width: 200,
               child: TextField(
                 inputFormatters: [
-                  FilteringTextInputFormatter.deny(RegExp(r'[a-zA-Z]')),
+                  FilteringTextInputFormatter.deny(RegExp(r"[a-zA-Z]")),
                 ],
-                keyboardType: TextInputType.number,
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
                 controller: textEditingController,
                 onChanged: onChangeTextField,
               ),
